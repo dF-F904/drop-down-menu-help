@@ -4,9 +4,19 @@ from discord.ext import commands
 from discord.ext.commands import bot
 from discord.gateway import DiscordClientWebSocketResponse
 
-OPTIONS = [
+HELP_OPTIONS = [
         discord.SelectOption(label="Moderation", description="Auto moderation help", emoji="🛡️"),
+        #discord.SelectOption(label="ChatBot", description="ChatBot help", emoji="🤖"),
         discord.SelectOption(label="Fun", description="Fun help", emoji="🎯"),
+        #discord.SelectOption(label="Giveaway", description="Giveaway help", emoji="🎉"),
+        #discord.SelectOption(label="Karma", description="Karma help", emoji="🎭"),
+        #discord.SelectOption(label="Leveling", description="Leveling help", emoji=var.E_LEVELING),
+        #discord.SelectOption(label="Moderation", description="Moderation help", emoji="🔨"),
+        #discord.SelectOption(label="Reaction Roles", description="Reaction roles help", emoji="✨"),
+        #discord.SelectOption(label="Verification", description="Member verification help", emoji="✅"),
+        #discord.SelectOption(label="Welcome", description="Welcome greeting help", emoji="👋"),
+        #discord.SelectOption(label="Extras", description="Extra commands help (not a plugin)", emoji="▶️"),
+        #discord.SelectOption(label="Settings", description="Bot settings help (not a plugin)", emoji=var.E_SETTINGS)
     ]
 
 
@@ -39,7 +49,7 @@ class View(discord.ui.View):
             await interaction.response.send_message("You can't select items in someone else's command!", ephemeral=True)
         return interaction.user == self.ctx.author
     
-    @discord.ui.select(placeholder="Select a category!", options=OPTIONS)
+    @discord.ui.select(placeholder="Select a category!", options=HELP_OPTIONS)
     async def callback(self, select: discord.ui.select, interaction: discord.Interaction):
         help_type = interaction.data["values"][0]
 
@@ -55,9 +65,6 @@ class Help(commands.Cog):
     async def help(self, ctx):
         help_embed = discord.Embed(title="Help | Commands", description=f"Use the dropdown menu below to get more help on a specfic command category", color=discord.Color.random()) 
         help_embed.add_field(name="**__Moderation__**", value=f"`warn` | `mute` | `ban` | `unban` | `modlogs`", inline=False)
-        #help_embed.add_field(name="**__Self Roles__**", value=f"`android` | `asia` | `emulator` | `europe` | `ios` | `NA` | `SA`", inline=False)
-        #help_embed.add_field(name="**__Fun__**", value=f"`av` |  `beg` | `buy` | `cat` | `coins` | `dadjoke` | `daily` | `dice` | `dog` | `eightball` `give` | `poll` | `rank` | `reminder` | `richest` | `rob` | `shop` | `slots` | `top` | `work`", inline=False) 
-        #help_embed.add_field(name="**__Other__**", value=f"`activity` | `CRcolor` | `CRmove` | `CRname` | `join` | `pause` `play` | `resume` | `serverinfo`\n \n \n **__Support Website__** | [Click here](https://juicy-celestial-backpack.glitch.me/)", inline=False)
         help_embed.set_author(name=ctx.author, icon_url=ctx.author.avatar.url)
         await ctx.send(embed=help_embed, view=View(ctx))
 
