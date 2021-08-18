@@ -4,19 +4,9 @@ from discord.ext import commands
 from discord.ext.commands import bot
 from discord.gateway import DiscordClientWebSocketResponse
 
-HELP_OPTIONS = [
+OPTIONS = [
         discord.SelectOption(label="Moderation", description="Auto moderation help", emoji="🛡️"),
-        #discord.SelectOption(label="ChatBot", description="ChatBot help", emoji="🤖"),
         discord.SelectOption(label="Fun", description="Fun help", emoji="🎯"),
-        #discord.SelectOption(label="Giveaway", description="Giveaway help", emoji="🎉"),
-        #discord.SelectOption(label="Karma", description="Karma help", emoji="🎭"),
-        #discord.SelectOption(label="Leveling", description="Leveling help", emoji=var.E_LEVELING),
-        #discord.SelectOption(label="Moderation", description="Moderation help", emoji="🔨"),
-        #discord.SelectOption(label="Reaction Roles", description="Reaction roles help", emoji="✨"),
-        #discord.SelectOption(label="Verification", description="Member verification help", emoji="✅"),
-        #discord.SelectOption(label="Welcome", description="Welcome greeting help", emoji="👋"),
-        #discord.SelectOption(label="Extras", description="Extra commands help (not a plugin)", emoji="▶️"),
-        #discord.SelectOption(label="Settings", description="Bot settings help (not a plugin)", emoji=var.E_SETTINGS)
     ]
 
 
@@ -49,7 +39,7 @@ class View(discord.ui.View):
             await interaction.response.send_message("You can't select items in someone else's command!", ephemeral=True)
         return interaction.user == self.ctx.author
     
-    @discord.ui.select(placeholder="Select a category!", options=HELP_OPTIONS)
+    @discord.ui.select(placeholder="Select a category!", options=OPTIONS)
     async def callback(self, select: discord.ui.select, interaction: discord.Interaction):
         help_type = interaction.data["values"][0]
 
