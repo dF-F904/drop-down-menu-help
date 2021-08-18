@@ -2,15 +2,19 @@ import discord
 from discord.ext import commands
 import os
 
-intents = discord.Intents.all()
+intents = discord.Intents.default()
+intents.members = True
+intents.presences = True
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or("$"), intents=intents, case_insensitive=True, help_command=None)
 
 
 @bot.event
 async def on_ready():
-    print("Bot is ready!")
-
+    print(f"{bot.user} is ready!")
+    
+  
+### not really any other commands needed here, still a project in beta.
 
 
 
